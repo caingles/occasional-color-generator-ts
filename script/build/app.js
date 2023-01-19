@@ -6,8 +6,8 @@ const colorText = document.querySelector('#colorText');
 const btnColorRandom = document.querySelector('#btnColorRandom');
 const colors = ['Red', 'Blue', 'Green', 'Yellow', 'Pink'];
 let colorType = "hexadecimal";
+let numberRandom = 0;
 const randomNumberGenerator = (typeNumber) => {
-    let numberRandom = 0;
     if (typeNumber == "rgb") {
         numberRandom = Math.floor(Math.random() * (255 + 1));
         return numberRandom;
@@ -17,7 +17,7 @@ const randomNumberGenerator = (typeNumber) => {
         return numberRandom.toString(16);
     }
     if (typeNumber == "simple text") {
-        numberRandom = Math.floor(Math.random() * (5 + 1));
+        numberRandom = Math.floor(Math.random() * 5);
         return numberRandom;
     }
 };
@@ -29,4 +29,16 @@ colorRgb === null || colorRgb === void 0 ? void 0 : colorRgb.addEventListener('c
 });
 colorSimple === null || colorSimple === void 0 ? void 0 : colorSimple.addEventListener('click', () => {
     colorType = "simple text";
+});
+btnColorRandom === null || btnColorRandom === void 0 ? void 0 : btnColorRandom.addEventListener('click', () => {
+    if (colorType === 'rgb') {
+        document.body.style.background = `rgb(${randomNumberGenerator("rgb")}, ${randomNumberGenerator("rgb")}, ${randomNumberGenerator("rgb")})`;
+    }
+    if (colorType === 'hexadecimal') {
+        document.body.style.background = `#${randomNumberGenerator("hexadecimal")}${randomNumberGenerator("hexadecimal")}${randomNumberGenerator("hexadecimal")}`;
+    }
+    if (colorType === 'simple text') {
+        let colorSimpleNumber = randomNumberGenerator("simple text");
+        document.body.style.background = `${colors[colorSimpleNumber]}`;
+    }
 });

@@ -5,9 +5,9 @@ const colorText = document.querySelector('#colorText')
 const btnColorRandom = document.querySelector('#btnColorRandom')
 const colors = ['Red', 'Blue', 'Green', 'Yellow', 'Pink']
 let colorType: string = "hexadecimal"
+let numberRandom: number = 0;
 
 const randomNumberGenerator = (typeNumber: string) => {
-    let numberRandom: number = 0;
 
     if (typeNumber == "rgb") {
         numberRandom = Math.floor(Math.random() * (255 + 1))
@@ -20,7 +20,7 @@ const randomNumberGenerator = (typeNumber: string) => {
     }
 
     if (typeNumber == "simple text") {
-        numberRandom = Math.floor(Math.random() * (5 + 1))
+        numberRandom = Math.floor(Math.random() * 5)
         return numberRandom;
     }
 }
@@ -35,4 +35,20 @@ colorRgb?.addEventListener('click', () => {
 
 colorSimple?.addEventListener('click', () => {
     colorType = "simple text"
+})
+
+btnColorRandom?.addEventListener('click', () => {
+
+    if (colorType === 'rgb') {
+        document.body.style.background = `rgb(${randomNumberGenerator("rgb")}, ${randomNumberGenerator("rgb")}, ${randomNumberGenerator("rgb")})`
+    }
+
+    if (colorType === 'hexadecimal') {
+        document.body.style.background = `#${randomNumberGenerator("hexadecimal")}${randomNumberGenerator("hexadecimal")}${randomNumberGenerator("hexadecimal")}`
+    }
+
+    if (colorType === 'simple text') {
+        let colorSimpleNumber: any = randomNumberGenerator("simple text")
+        document.body.style.background = `${colors[colorSimpleNumber]}`
+    }
 })
